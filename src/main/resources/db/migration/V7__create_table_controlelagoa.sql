@@ -1,0 +1,7 @@
+CREATE TABLE controle_lagoa (
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    data DATE NOT NULL UNIQUE,
+    ocupacao_atual INTEGER NOT NULL DEFAULT 0,
+    total_checkins INTEGER NOT NULL DEFAULT 0,
+    total_checkouts INTEGER NOT NULL DEFAULT 0
+);
