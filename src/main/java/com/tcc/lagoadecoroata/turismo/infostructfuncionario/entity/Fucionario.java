@@ -1,4 +1,4 @@
-package com.tcc.lagoadecoroata.turismo.infostructuser.entity;
+package com.tcc.lagoadecoroata.turismo.infostructfuncionario.entity;
 import jakarta.persistence.*;
 import lombok.*;
 @Getter

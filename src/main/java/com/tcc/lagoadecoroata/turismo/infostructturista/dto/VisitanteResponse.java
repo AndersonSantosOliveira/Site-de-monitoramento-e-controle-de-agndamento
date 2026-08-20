@@ -1,6 +1,6 @@
-package com.tcc.lagoadecoroata.turismo.infostructvisitor.dto;
+package com.tcc.lagoadecoroata.turismo.infostructturista.dto;
 
-import com.tcc.lagoadecoroata.turismo.infostructvisitor.entity.Visitante;
+import com.tcc.lagoadecoroata.turismo.infostructturista.entity.Visitante;
 
 public record VisitanteResponse(Long id, String nome, String email) {
     public VisitanteResponse(Visitante visitante){

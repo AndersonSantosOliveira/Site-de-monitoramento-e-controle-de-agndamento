@@ -1,9 +1,9 @@
-package com.tcc.lagoadecoroata.turismo.infostructuser.service;
+package com.tcc.lagoadecoroata.turismo.infostructfuncionario.service;
 
-import com.tcc.lagoadecoroata.turismo.infostructuser.dto.FuncionarioAtualizarRequestDto;
-import com.tcc.lagoadecoroata.turismo.infostructuser.dto.FuncionarioRequestDto;
-import com.tcc.lagoadecoroata.turismo.infostructuser.entity.Fucionario;
-import com.tcc.lagoadecoroata.turismo.infostructuser.repository.FuncionarioRepository;
+import com.tcc.lagoadecoroata.turismo.infostructfuncionario.dto.FuncionarioAtualizarRequestDto;
+import com.tcc.lagoadecoroata.turismo.infostructfuncionario.dto.FuncionarioRequestDto;
+import com.tcc.lagoadecoroata.turismo.infostructfuncionario.entity.Fucionario;
+import com.tcc.lagoadecoroata.turismo.infostructfuncionario.repository.FuncionarioRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

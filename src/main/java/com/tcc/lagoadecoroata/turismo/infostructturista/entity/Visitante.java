@@ -1,4 +1,4 @@
-package com.tcc.lagoadecoroata.turismo.infostructvisitor.entity;
+package com.tcc.lagoadecoroata.turismo.infostructturista.entity;
 
 import jakarta.persistence.*;
 import lombok.*;

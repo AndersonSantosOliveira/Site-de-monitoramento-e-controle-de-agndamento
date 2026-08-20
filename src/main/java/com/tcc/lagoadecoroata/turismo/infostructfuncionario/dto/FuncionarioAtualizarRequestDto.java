@@ -1,4 +1,4 @@
-package com.tcc.lagoadecoroata.turismo.infostructuser.dto;
+package com.tcc.lagoadecoroata.turismo.infostructfuncionario.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Pattern;

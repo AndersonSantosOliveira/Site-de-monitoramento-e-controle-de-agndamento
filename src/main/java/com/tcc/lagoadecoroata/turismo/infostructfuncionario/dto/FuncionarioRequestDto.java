@@ -1,16 +1,13 @@
-package com.tcc.lagoadecoroata.turismo.infostructvisitor.dto;
+package com.tcc.lagoadecoroata.turismo.infostructfuncionario.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
-public record VisitanteRequesteDto(
+public record FuncionarioRequestDto(
+
         @NotBlank(message = "O nome é obrigatório.")
-        @Pattern(
-                regexp = "^[A-Za-zÀ-ÿ ]+$",
-                message = "O nome deve conter apenas letras e espaços."
-        )
         String nome,
 
         @NotBlank(message = "O e-mail é obrigatório.")
@@ -24,13 +21,7 @@ public record VisitanteRequesteDto(
                 regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,20}$",
                 message = "A senha deve conter pelo menos uma letra maiúscula, uma minúscula, um número e um caractere especial."
         )
-        String senha,
+        String senha
 
-        @NotBlank(message = "O telefone é obrigatório.")
-        @Pattern(
-                regexp = "^\\d{11}$",
-                message = "O telefone deve conter exatamente 11 dígitos."
-        )
-        String telefone
 ) {
 }

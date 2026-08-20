@@ -1,10 +1,10 @@
-package com.tcc.lagoadecoroata.turismo.infostructvisitor.controller;
+package com.tcc.lagoadecoroata.turismo.infostructturista.controller;
 
-import com.tcc.lagoadecoroata.turismo.infostructvisitor.dto.VisitanteAtulizacaoRequesteDto;
-import com.tcc.lagoadecoroata.turismo.infostructvisitor.dto.VisitanteRequesteDto;
-import com.tcc.lagoadecoroata.turismo.infostructvisitor.dto.VisitanteResponse;
-import com.tcc.lagoadecoroata.turismo.infostructvisitor.entity.Visitante;
-import com.tcc.lagoadecoroata.turismo.infostructvisitor.service.VisitanteService;
+import com.tcc.lagoadecoroata.turismo.infostructturista.dto.VisitanteAtulizacaoRequesteDto;
+import com.tcc.lagoadecoroata.turismo.infostructturista.dto.VisitanteRequesteDto;
+import com.tcc.lagoadecoroata.turismo.infostructturista.dto.VisitanteResponse;
+import com.tcc.lagoadecoroata.turismo.infostructturista.entity.Visitante;
+import com.tcc.lagoadecoroata.turismo.infostructturista.service.VisitanteService;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

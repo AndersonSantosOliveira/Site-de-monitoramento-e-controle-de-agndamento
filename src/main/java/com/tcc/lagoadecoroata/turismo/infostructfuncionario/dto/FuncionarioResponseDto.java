@@ -1,6 +1,6 @@
-package com.tcc.lagoadecoroata.turismo.infostructuser.dto;
+package com.tcc.lagoadecoroata.turismo.infostructfuncionario.dto;
 
-import com.tcc.lagoadecoroata.turismo.infostructuser.entity.Fucionario;
+import com.tcc.lagoadecoroata.turismo.infostructfuncionario.entity.Fucionario;
 
 public record FuncionarioResponseDto(
         Long id,

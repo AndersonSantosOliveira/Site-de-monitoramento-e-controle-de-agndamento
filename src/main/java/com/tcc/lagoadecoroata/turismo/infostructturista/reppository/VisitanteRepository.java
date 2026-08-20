@@ -1,6 +1,6 @@
-package com.tcc.lagoadecoroata.turismo.infostructvisitor.reppository;
+package com.tcc.lagoadecoroata.turismo.infostructturista.reppository;
 
-import com.tcc.lagoadecoroata.turismo.infostructvisitor.entity.Visitante;
+import com.tcc.lagoadecoroata.turismo.infostructturista.entity.Visitante;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface VisitanteRepository extends JpaRepository<Visitante, Long> {

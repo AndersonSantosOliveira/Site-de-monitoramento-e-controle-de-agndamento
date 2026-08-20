@@ -1,7 +1,7 @@
-package com.tcc.lagoadecoroata.turismo.infostructuser.repository;
+package com.tcc.lagoadecoroata.turismo.infostructfuncionario.repository;
 
 
-import com.tcc.lagoadecoroata.turismo.infostructuser.entity.Fucionario;
+import com.tcc.lagoadecoroata.turismo.infostructfuncionario.entity.Fucionario;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface FuncionarioRepository extends JpaRepository<Fucionario, Long> {
