@@ -1,13 +1,11 @@
 package com.tcc.lagoadecoroata.turismo.infostructagendamento.entity;
 
-import com.tcc.lagoadecoroata.turismo.infostructvisitor.entity.Visitante;
+import com.tcc.lagoadecoroata.turismo.infostructturista.entity.Visitante;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 @Getter
 @Setter

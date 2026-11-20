@@ -12,8 +12,8 @@ import com.tcc.lagoadecoroata.turismo.infostructagendamento.entity.Agendamento;
 import com.tcc.lagoadecoroata.turismo.infostructagendamento.entity.StatusAgendamento;
 import com.tcc.lagoadecoroata.turismo.infostructagendamento.repository.AgendamentoRepository;
 import com.tcc.lagoadecoroata.turismo.infostructagendamento.service.impl.AgendamentoServiceImpl;
-import com.tcc.lagoadecoroata.turismo.infostructvisitor.entity.Visitante;
-import com.tcc.lagoadecoroata.turismo.infostructvisitor.reppository.VisitanteRepository;
+import com.tcc.lagoadecoroata.turismo.infostructturista.entity.Visitante;
+import com.tcc.lagoadecoroata.turismo.infostructturista.reppository.VisitanteRepository;
 import jakarta.mail.MessagingException;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
@@ -50,7 +50,6 @@ public class AgendamentoService implements AgendamentoServiceImpl {
     @Transactional
     public Agendamento criarAgendamento(AgendamentoRequestDto dto) {
 
-        //Metodo de verificação de turistas para identificar caso já tenham uma reserva
         Visitante visitante = visitanteRepository.findById(dto.visitanteId()).orElseThrow(() ->
                 new ResponseStatusException(HttpStatus.NOT_FOUND,
                         "Visitante não encontrado."));
@@ -61,7 +60,6 @@ public class AgendamentoService implements AgendamentoServiceImpl {
                     "O visitante já possui um agendamento para esta data.");
         }
 
-        //Metodo de verificação da capacidade disponivel antes da reserva ser realizada
         CapacidadeResponseDto capacidade =
                 verificarCapacidade(dto.data(), dto.quantidadePessoas());
 
@@ -95,7 +93,6 @@ public class AgendamentoService implements AgendamentoServiceImpl {
         return agendamentoSalvo;
     }
 
-    //-----------------------------------------------------------------
 
     @Transactional
     @Override
@@ -107,7 +104,6 @@ public class AgendamentoService implements AgendamentoServiceImpl {
                         "Agendamento não encontrado"
                 ));
 
-        // Verifica se já está cancelado
         if (agendamento.getStatus() == StatusAgendamento.CANCELADO) {
             throw new ResponseStatusException(
                     HttpStatus.CONFLICT,
@@ -115,7 +111,6 @@ public class AgendamentoService implements AgendamentoServiceImpl {
             );
         }
 
-        // Verifica se a data já passou
         if (agendamento.getData().isBefore(LocalDate.now())) {
             throw new ResponseStatusException(
                     HttpStatus.CONFLICT,
@@ -130,28 +125,14 @@ public class AgendamentoService implements AgendamentoServiceImpl {
             );
         }
 
-        //------------------------------------------------------------------------
-
-        // Atualiza o status
         agendamento.setStatus(StatusAgendamento.CANCELADO);
 
-        // Salva a alteração
         agendamentoRepository.save(agendamento);
 
         return new AgendamentoResponseDto(agendamento);
     }
 
-    @Transactional
-    @Override
-    public AgendamentoResponseDto buscarPorCodigoReserva(String codigoReserva) {
-        Agendamento agendamento = agendamentoRepository.findByCodigoReserva(codigoReserva)
-                .orElseThrow(() -> new ResponseStatusException(
-                        HttpStatus.NOT_FOUND,
-                        "Agendamento não encontrado."
-                ));
 
-        return new AgendamentoResponseDto(agendamento);
-    }
 
     @Override
     public Page<AgendamentoResponseDto> listarAgendamentos(Pageable pageable) {
@@ -186,55 +167,9 @@ public class AgendamentoService implements AgendamentoServiceImpl {
     public String gerarCodigoReserva() {
         String codigo;
         do {
-            codigo = UUID.randomUUID().toString().substring(0, 8).toUpperCase();
+            codigo = UUID.randomUUID().toString().substring(0, 14).toUpperCase();
         } while (agendamentoRepository.existsByCodigoReserva(codigo));
         return codigo;
-    }
-
-    @Transactional
-    @Override
-    public void realizarCheckIn(String codigoReserva) {
-        var agendamento = agendamentoRepository.findByCodigoReserva(codigoReserva).orElseThrow(
-                () -> new ResponseStatusException(
-                        HttpStatus.NOT_FOUND,
-                        "Agendamento não encontrado."
-                ));
-        if (agendamento.getStatus() != StatusAgendamento.CONFIRMADO) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "O agendamento não permite realizar check-in.");
-        }
-        if (!agendamento.getData().equals(LocalDate.now())) {
-            throw new ResponseStatusException(
-                    HttpStatus.CONFLICT,
-                    "A reserva não é válida para hoje."
-            );
-        }
-        agendamento.setStatus(StatusAgendamento.CHECK_IN);
-        agendamentoRepository.save(agendamento);
-        controleLagoaService.registrarCheckIn(agendamento.getQuantidadePessoas());
-    }
-
-    @Transactional
-    @Override
-    public void realizarCheckOut(String codigoReserva) {
-        var agendamento = agendamentoRepository.findByCodigoReserva(codigoReserva)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
-                        "Agendamento não encontrado."));
-
-        if (agendamento.getStatus() != StatusAgendamento.CHECK_IN) {
-            throw new ResponseStatusException(
-                    HttpStatus.CONFLICT,
-                    "O visitante ainda não realizou o check-in."
-            );
-
-        }
-        if (!agendamento.getData().equals(LocalDate.now())) {
-            throw new ResponseStatusException(
-                    HttpStatus.CONFLICT,
-                    "A reserva não é válida para hoje."
-            );
-        }
-        agendamento.setStatus(StatusAgendamento.FINALIZADO);
-        agendamentoRepository.save(agendamento);
     }
 
 }

@@ -18,18 +18,12 @@ public interface AgendamentoServiceImpl {
 
     AgendamentoResponseDto cancelarAgendamento(Long id);
 
-    AgendamentoResponseDto buscarPorCodigoReserva(String codigoReserva);
-
     Page<AgendamentoResponseDto> listarAgendamentos(Pageable pageable);
 
     List<AgendamentoResponseDto> listarAgendamentosPorData(LocalDate data);
 
     CapacidadeResponseDto verificarCapacidade(LocalDate data, Integer quantidadePessoas);
 
-
     String gerarCodigoReserva();
 
-    void realizarCheckIn(String codigoReserva);
-
-    void realizarCheckOut(String codigoReserva);
 }

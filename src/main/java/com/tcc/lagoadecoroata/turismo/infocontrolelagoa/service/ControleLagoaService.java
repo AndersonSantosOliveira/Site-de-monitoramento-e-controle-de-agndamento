@@ -10,7 +10,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
 import java.util.Optional;
-
 @Service
 public class ControleLagoaService implements ControleLagoaServiceImpl {
     private final ControleLagoaRepository controleLagoaRepository;
@@ -21,8 +20,6 @@ public class ControleLagoaService implements ControleLagoaServiceImpl {
         this.controleLagoaRepository = controleLagoaRepository;
     }
 
-
-    //Metodo de registro de chekins
     @Transactional
     @Override
     public void registrarCheckIn(Integer quantidadePessoas) {
@@ -71,7 +68,7 @@ public class ControleLagoaService implements ControleLagoaServiceImpl {
         if (controle.isEmpty()) {
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND,
-                    "Controle da lagoa não encontrado para hoje."
+                    "Não há registro de ocupação para hoje."
             );
         }
 

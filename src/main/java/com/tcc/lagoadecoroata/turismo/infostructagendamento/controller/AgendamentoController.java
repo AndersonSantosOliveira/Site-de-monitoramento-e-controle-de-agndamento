@@ -6,7 +6,7 @@ import com.tcc.lagoadecoroata.turismo.infostructagendamento.dtos.CapacidadeRespo
 import com.tcc.lagoadecoroata.turismo.infostructagendamento.entity.Agendamento;
 import com.tcc.lagoadecoroata.turismo.infostructagendamento.service.AgendamentoService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -49,15 +49,6 @@ public class AgendamentoController {
         return ResponseEntity.ok(agendamento);
     }
 
-    @GetMapping("/codigo/{codigo}")
-    public ResponseEntity<AgendamentoResponseDto> buscarPorCodigo(
-            @PathVariable String codigo) {
-
-        var agendamento = agendamentoService.buscarPorCodigoReserva(codigo);
-
-        return ResponseEntity.ok(agendamento);
-    }
-
     @GetMapping
     public ResponseEntity<Page<AgendamentoResponseDto>> listarAgendamentos(
             @PageableDefault(size = 10, sort = "id") Pageable pageable) {
@@ -76,16 +67,6 @@ public class AgendamentoController {
         return ResponseEntity.ok(lista);
     }
 
-    @PutMapping("/check-in/{codigo}")
-    public ResponseEntity<Void> realizarCheckIn(
-            @PathVariable String codigo) {
-
-        agendamentoService.realizarCheckIn(codigo);
-
-        return ResponseEntity.ok().build();
-    }
-
-
     @GetMapping("/capacidade")
     public ResponseEntity<CapacidadeResponseDto> verificarCapacidade(
             @RequestParam LocalDate data,
@@ -96,13 +77,4 @@ public class AgendamentoController {
         return ResponseEntity.ok(capacidade);
     }
 
-
-    @PutMapping("/check-out/{codigo}")
-    public ResponseEntity<Void> realizarCheckOut(
-            @PathVariable String codigo) {
-
-        agendamentoService.realizarCheckOut(codigo);
-
-        return ResponseEntity.ok().build();
-    }
 }
