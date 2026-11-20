@@ -12,4 +12,6 @@ public interface EstatisticaAgendamentoServiceImpl {
     Double consultarPercentual(LocalDate data);
 
     Boolean consultarDisponibilidade(LocalDate data);
+
+    DadosEstatisticaResponse consultarEstatisticaHoje();
 }

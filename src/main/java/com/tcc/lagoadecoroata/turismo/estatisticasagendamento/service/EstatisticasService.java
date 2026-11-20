@@ -2,6 +2,8 @@ package com.tcc.lagoadecoroata.turismo.estatisticasagendamento.service;
 
 import com.tcc.lagoadecoroata.turismo.estatisticasagendamento.dtos.DadosEstatisticaResponse;
 import com.tcc.lagoadecoroata.turismo.estatisticasagendamento.service.estatisticasserviceimpl.EstatisticaAgendamentoServiceImpl;
+import com.tcc.lagoadecoroata.turismo.infocontrolelagoa.entity.ControleLagoa;
+import com.tcc.lagoadecoroata.turismo.infocontrolelagoa.service.ControleLagoaService;
 import com.tcc.lagoadecoroata.turismo.infostructagendamento.repository.AgendamentoRepository;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +13,11 @@ import java.time.LocalDate;
 public class EstatisticasService implements EstatisticaAgendamentoServiceImpl {
     private static final int CAPACIDADE_MAXIMA = 50;
     private final AgendamentoRepository agendamentoRepository;
+    private final ControleLagoaService controleLagoaService;
 
-    public EstatisticasService(AgendamentoRepository agendamentoRepository) {
+    public EstatisticasService(AgendamentoRepository agendamentoRepository, ControleLagoaService controleLagoaService) {
         this.agendamentoRepository = agendamentoRepository;
+        this.controleLagoaService = controleLagoaService;
     }
 
     private Integer calcularVagasRestante(Integer agendados) {
@@ -53,5 +57,14 @@ public class EstatisticasService implements EstatisticaAgendamentoServiceImpl {
                 calcularVagasRestante(agendados);
 
         return vagasRestantes > 0;
+    }
+
+    @Override
+    public DadosEstatisticaResponse consultarEstatisticaHoje() {
+        Integer quantidadeHojeNaLagoa = controleLagoaService.consultarOcupacaoAtual();
+        Integer vagasRestante = controleLagoaService.consultarVagasRestantes();
+        Double percentualDeOcupacaoHoje = controleLagoaService.consultarPercentualOcupacao();
+        return new DadosEstatisticaResponse(LocalDate.now(),
+                quantidadeHojeNaLagoa, vagasRestante, percentualDeOcupacaoHoje);
     }
 }
