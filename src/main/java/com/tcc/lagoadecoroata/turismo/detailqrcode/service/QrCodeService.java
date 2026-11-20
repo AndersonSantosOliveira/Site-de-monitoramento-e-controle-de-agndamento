@@ -21,7 +21,7 @@ public class QrCodeService {
 
 
             BitMatrix bitMatrix = new MultiFormatWriter()
-                    .encode(codigoReserva, BarcodeFormat.QR_CODE, 300, 300);
+                    .encode(codigoReserva, BarcodeFormat.QR_CODE, 250, 250);
             BufferedImage bufferedImage = MatrixToImageWriter.toBufferedImage(bitMatrix);
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 

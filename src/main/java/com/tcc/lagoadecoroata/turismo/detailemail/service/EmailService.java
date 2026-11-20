@@ -1,12 +1,12 @@
 package com.tcc.lagoadecoroata.turismo.detailemail.service;
 
 import com.tcc.lagoadecoroata.turismo.detailemail.dtos.ConfirmacaoAgendamentoEmailDto;
-import com.tcc.lagoadecoroata.turismo.detailemail.dtos.EmailRequestDto;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,14 +17,12 @@ public class EmailService {
         this.javaMailSender = javaMailSender;
     }
 
+    @Async
     public void enviarConfirmacaoAgendamento(String destinatario, ConfirmacaoAgendamentoEmailDto dto) throws MessagingException {
 
         MimeMessage message = javaMailSender.createMimeMessage();
 
-        MimeMessageHelper helper = new MimeMessageHelper(
-                message,
-                true
-        );
+        MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
         helper.setFrom("lagoacoroata@gmail.com");
         helper.setTo(destinatario);
